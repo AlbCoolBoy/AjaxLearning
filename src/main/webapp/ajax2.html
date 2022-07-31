@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function(){
+        document.getElementById("button").onclick=function(){
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState==4){
+                    if(this.status==200){
+                        document.getElementById("div").innerHTML=this.responseText;
+                    }else{
+                        alert(this.status);
+                    }
+                }
+            }
+            xhr.open("GET","/AjaxLearning_war_exploded/ajaxrequest2?userid=2020120&username=smt",true)
+            xhr.send()
+        }
+    }
+</script>
+
+
+<input type="button" id="button" value="button">
+<span id="myspan"></span>
+<div id="div"></div>
+
+</body>
+</html>

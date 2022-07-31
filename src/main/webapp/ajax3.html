@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function(){
+        document.getElementById("button").onclick=function(){
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState==4){
+                    if(this.status==200){
+                        document.getElementById("div").innerHTML=this.responseText;
+                    }else{
+                        alert(this.status);
+                    }
+                }
+            }
+
+
+            xhr.open("POST","/AjaxLearning_war_exploded/post",true)
+            //模拟以表单的形式提交数据的核心代码
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+            var reci_userid = document.getElementById("userid").value
+            var reci_username=document.getElementById("username").value
+            xhr.send("userid="+reci_userid+"&username="+reci_username); //模拟form表单的格式提交数据
+        }
+    }
+</script>
+userid <input type="text" id="userid">
+<br>
+username <input type="text" id="username">
+<button id="button"></button>
+<div id="div">
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册用户名校验</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+    window.onload=function (){
+        //文本框得到焦点的同时也会清空提示信息
+        document.getElementById("username").onfocus=function (){
+            document.getElementById("tips").innerHTML=" "
+        }
+        document.getElementById("username").onblur=function (){
+            console.log("文本框失去焦点")
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState==4){
+                    if(this.status==200){
+                        document.getElementById("tips").innerHTML=this.responseText
+                    }
+                }
+            }
+            xhr.open("POST","/AjaxLearning_war_exploded/ajaxrequest4",true)
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+            var username= document.getElementById("username").value
+            xhr.send("username="+username)
+        }
+    }
+</script>
+用户名： <input type="text" id="username" >
+
+<br>
+<span id="tips"></span>
+
+
+</html>

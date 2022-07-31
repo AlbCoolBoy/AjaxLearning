@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("helloBtn").onclick = function () {
+            //发送ajax请求
+            //1.创建Ajax核心对象XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            //2.注册回调函数
+            xhr.onreadystatechange = function () {
+                //这个函数就是回调函数，这个函数在readState状态发生改变的时候被调用
+                if(xhr.status ==404){
+                    alert("您访问的资源不存在")
+                }else if(xhr.status ==500){
+                    alert("服务器内部发生严重错误")
+                }else if(xhr.status ==200){
+                    //alert(xhr.responseText)
+                    //将响应信息放进div图层中进行渲染,这就是异步请求中比较核心的点
+                    document.getElementById("div").innerHTML=this.responseText
+                }
+            }
+            //3.开启通道
+            //通过open方法来开启通道，open（method,url,async,user,password）函数中各个参数的含义
+            //method是请求的方式
+            //url是请求的路径
+            //async只能是true或是false,true表示这里发送的请求是一个异步请求，false表示发送的请求是同步请求
+            //user:用户名
+            //psw:密码，
+            xhr.open("GET", "/Ajax_war_exploded/ajaxrequest1", true)
+            //4.发送请求
+            xhr.send()
+        }
+    }
+</script>
+<input type="button" value="hello ajax" id="helloBtn">
+<div id="div"></div>
+</body>
+</html>
